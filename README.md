@@ -8,7 +8,7 @@ Welcome to the repository for our paper, "Weakly Supervised Land-Cover Classific
 - **Double Filtering of LR Labels**: We filter out noise in LR labels during both label selection and assignment stages.
 - **Graph Cut Method**: Utilizes an energy function minimization task to select correct LR labels.
 - **Label Refinement**: Incorporates Forest and Water indices and a Random Forest (RF) classifier to refine labels.
-- **Improved Accuracy**: Achieves 2-14% higher average accuracy (AA) on DFC2020 datasets compared to models trained on original LR labels.
+- **Improved Accuracy**: Achieves 2-14% higher average accuracy (AA) on DFC2020 datasets compared to multiple models trained on original LR labels.
 
 ## Installation
 
@@ -37,9 +37,9 @@ Weakly-Supervised/
 ├── validation/                 # Folder to store validation data
 │
 ├── Evaluation.py               # Script for evaluating model performance
-├── GraphCut.py                 # Processes hyperspectral imagery and LR labels
+├── GraphCut.py                 # Processes HR multispectral imagery and LR labels
 ├── RF.py                       # Trains Random Forest model
-├── Refine.py                   # Combines indexing and RF for HR label prediction
+├── Refine.py                   # Refine the LR to HR label
 ├── indexStat.py                # Statistical analysis of indices
 ├── indexPlot.py                # Plotting tool for indices
 │
@@ -49,13 +49,13 @@ Weakly-Supervised/
 ## Usage
 
 ### GraphCut.py
-Processes HR multispectral imagery and LR labels to select relative correct labels, excluding potentially incorrect label areas.
+Processes HR multispectral imagery and LR labels to select relatively correct labels, excluding potentially incorrect label areas.
 
 ### RF.py
-Trains a Random Forest model using the labels select from GraphCut.py and HR multispectral imagery for predicting HR labels.
+Trains a Random Forest model using the labels selected from GraphCut.py and HR multispectral imagery for predicting HR labels.
 
 ### Refine.py
-Utilizes spectral indice and Random Forest predictions to assign a new HR label.
+Utilizes spectral indices and Random Forest predictions to assign a new HR label.
 
 ## Dataset
 The dataset utilized in this study is DFC2020, available at [IEEE Dataport](https://ieee-dataport.org/competitions/2020-ieee-grss-data-fusion-contest).
