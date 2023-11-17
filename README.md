@@ -7,32 +7,26 @@ Welcome to the repository for our paper, "Weakly Supervised Land-Cover Classific
 ### Key Features:
 - **Double Filtering of LR Labels**: We filter out noise in LR labels during both label selection and assignment stages.
 - **Graph Cut Method**: Utilizes an energy function minimization task to select correct LR labels.
-- **Label Refinement**: Incorporates Forest and Water indices and a Random Forest (RF) classifier to refine labels.
-- **Improved Accuracy**: Achieves 2-14% higher average accuracy (AA) on DFC2020 datasets compared to multiple models trained on original LR labels.
+- **Label Refinement**: Incorporates Forest and Water indices and a Random Forest classifier to refine labels.
+- **Improved Accuracy**: Models trained with our refined labels achieve 2-14% higher average accuracy on DFC2020 datasets compared to those trained on original LR labels and some top-performed weakly supervised learning approaches.
 
 ## Installation
 
 ### Prerequisites
 - Python 3.8.18
 - PyTorch 2.0.1
-- GDAL (for Linux users, use 'tifffile' instead)
+- Scipy
+- Sklearn
+- Segmentation_models_pytorch
+- GDAL
 
-### Installation Commands
-```bash
-conda install torch==2.0.1
-```
-```
-# For Windows
-conda install gdal
-# For other OS
-conda install tifffile
-```
 
 ## Repository Structure
 
 ```
 Weakly-Supervised/
 │
+├── segmentation_models/        # Folder to store segmentation models for experiments and comparison
 ├── training/                   # Folder to store training data
 ├── validation/                 # Folder to store validation data
 │
@@ -49,13 +43,13 @@ Weakly-Supervised/
 ## Usage
 
 ### GraphCut.py
-Processes HR multispectral imagery and LR labels to select relatively correct labels, excluding potentially incorrect label areas.
+Processes the HR multispectral imagery and LR labels to select relatively correct labels, excluding potentially incorrect ones.
 
 ### RF.py
-Trains a Random Forest model using the labels selected from GraphCut.py and HR multispectral imagery for predicting HR labels.
+Trains a Random Forest model using the HR multispectral imagery and labels selected from GraphCut.py.
 
 ### Refine.py
-Utilizes spectral indices and Random Forest predictions to assign a new HR label.
+Utilizes spectral indices and Random Forest predictions to assign new HR labels to whose labels are removed by label selection or those remaining labels with significantly low confidence.
 
 ## Dataset
 The dataset utilized in this study is DFC2020, available at [IEEE Dataport](https://ieee-dataport.org/competitions/2020-ieee-grss-data-fusion-contest).
